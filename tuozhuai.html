@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box,#box1{
+				width: 200px;
+				height: 200px;
+				background: red;
+				position: absolute;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			var box=document.getElementById('box');
+			box.onmousedown=function(e){
+				box.style.background='pink'
+				var disX=e.clientX-box.offsetLeft;
+				var disY=e.clientY-box.offsetTop;
+				var X=e.clientX;
+				var Y=e.clientY;
+				var box1=document.createElement('div');
+				box1.id='box1';
+				box1.style.left=box.offsetLeft+'px';
+				box1.style.top=box.offsetTop+'px';
+				document.body.appendChild(box1)
+				document.onmousemove=function(e){
+					box.style.background='rgba(255,0,0,0.5)'
+					box.style.left=e.clientX-disX+'px';
+					box.style.top=e.clientY-disY+'px';
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+					box.style.background='red';
+					document.body.removeChild(box1);
+				}
+				return false;
+			}
+		</script>
+	</body>
+</html>
